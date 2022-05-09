@@ -45,10 +45,32 @@ const getAllUtilisateurs = async (req, res) =>{
         let results = await cursor.toArray();
         res.status(200)
             .render('list', { titre, results });
+            //Pour renvouer les données en json plutot que dans une vue -> res.status(200).json(results)
     } catch (error) {
         console.log(error);
         res.status(500).json(error);    
     }
 }
 
-module.exports = { ajouterUtilisateur, getAllUtilisateurs };
+const ajouterUser = async (req, res) =>{
+    try {
+    
+        /**
+         * let nom = req.body.nom;
+        let prenom = req.body.prenom;
+        let mail = req.body.mail;
+        let passwd = req.body.passwd;
+        let passwd2 = req.body.passwd;
+        let cgu = req.body.cgu;
+         */
+
+        console.log(req.body);
+
+
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+module.exports = { ajouterUtilisateur, getAllUtilisateurs, ajouterUser };

@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    alert('Inscription validée');
+    console.log(req.body);
 })
 
 module.exports = router;

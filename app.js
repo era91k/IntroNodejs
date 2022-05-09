@@ -4,6 +4,7 @@ const { getAllUtilisateurs } = require("./models/utilisateur_model");
 const inscription = require('./controllers/inscription_route');
 
 const app = express();
+
 connecter("mongodb://127.0.0.1:27017/", (erreur) =>{
     if (erreur){
         console.log("Erreur lors de la connexion à la bdd");
@@ -16,6 +17,9 @@ connecter("mongodb://127.0.0.1:27017/", (erreur) =>{
 
 //app.set('views', '/views'); Views est le nom par défaut
 app.set('view engine', 'ejs');
+
+//Middleware pour extraire les données du formulaire
+app.use(express.urlencoded({extended : false}));
 
 //Trouver le fichier css lol
 app.use(express.static(__dirname + '/style'));

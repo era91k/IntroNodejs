@@ -1,0 +1,25 @@
+<%- include ("header.ejs", { titre }); %> 
+	<body>
+		<h1><%= titre %></h1>
+		<%- include("menu.ejs") %>
+		<!-- CONNEXION --> 
+		<div class="formulaire">
+			<div class="corps">
+				<div class="entete">
+					<h2><b>Se connecter</b></h2>
+					<p class="messg">Saisissez votre adresse e-mail et votre mot de passe pour vous connecter</p>
+				</div>
+				<form action="../php/login.php" method="POST">
+					<span>Adresse mail</span>
+					<input type="text" required class="text" name="mail" placeholder="Entrez votre mail">
+					<br>
+					<span>Mot de passe</span><br>
+					<input type="password" required class="text" name="mdp" placeholder="Tapez votre mot de passe">
+					<button class="signin">Connexion</button>	
+				</form>
+			</div>
+		</div>
+		<br/>
+		<p class="toreg">Vous n'avez pas de compte ?<a href="/page-register"> S'inscrire</a></p>
+	</body>
+</html>

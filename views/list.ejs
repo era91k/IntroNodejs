@@ -1,0 +1,18 @@
+<%- include("header.ejs", { titre }); %>
+<body>
+    <h1><%= titre %></h1>
+    <%- include("menu.ejs") %>
+    <% if ( results.length > 0 ){ %>
+        <% results.forEach( result =>{ %>
+            <div style="border:1px solid black;">
+                <p><%= result.nom %></p>
+                <p><%= result.prenom %></p>
+                <p><%= result.mail %></p>
+            </div>
+            <br>
+        <% }) %>
+    <% } else { %>
+        <p>Aucun résultat !</p>
+    <% } %>
+</body>
+</html>

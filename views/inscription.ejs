@@ -1,0 +1,38 @@
+<%- include("header.ejs", { titre }); %>
+	<body>
+		<h1><%= titre %></h1>
+		<%- include("menu.ejs") %>
+		<!-- INSCRIPTION -->
+		<div class="formulaire">
+			<div class="corps">
+				<div class="entete">
+					<h2><b>S'inscrire</b></h2>
+					<p class="messg">Pas encore de compte ? Inscrivez vous en moins d'une minute</p>
+				</div>
+				<form action="/page-register" method="POST">
+					<span>Votre nom</span>
+					<input id="nom" type="text" required class="text" name="nom" placeholder="Entrez votre nom">
+					<br>
+					<span>Votre prénom</span>
+					<input id="prenom" type="text" required class="text" name="prenom" placeholder="Entrez votre prénom">
+					<br>
+					<span>Adresse mail</span>
+					<input id="mail" type="email" required class="text" name="mail" placeholder="Entrez votre mail">
+					<br>
+					<span>Mot de passe</span><br>
+					<input id="password1" type="password" required class="text" name="password" placeholder="Entrez votre mot de passe">
+					<br/>
+					<span>Confirmation du mot de passe</span><br>
+					<input id="password2" type="password" required class="text" name="password2" placeholder="Confirmez votre mot de passe">
+					<div class="checkbox">
+						<input type="checkbox" required id="checkCgu" class="custom-checkbox" autocomplete="off">
+						<label for="checkCgu"><p class="toreg2">J'accepte les <a href="cgu.html">CGU</a></p></label>
+					</div>
+					<button id="btnValid" class="signin">Inscription</button>
+				</form>
+			</div>
+		</div>
+		<br/>
+		<p class="toreg">Vous avez déjà un compte ?<a href="/page-login"> S'identifier</a></p>
+	</body>
+</html>

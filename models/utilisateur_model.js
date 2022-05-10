@@ -22,9 +22,9 @@ const ajouterUtilisateur = (req, res) =>{
             .bd()
             .collection("utilisateurs")
             .insertOne(utilisateur);
-        
+        let titre = "Inscription réussie !";
         //Retourne un stat 200 car tout s'est bien éxécuté
-        res.status(200).json(result);
+        res.status(200).render('message', { titre });
     } catch (error) {
         console.log(error);
         res.status(500).json(error);
@@ -52,25 +52,5 @@ const getAllUtilisateurs = async (req, res) =>{
     }
 }
 
-const ajouterUser = async (req, res) =>{
-    try {
-    
-        /**
-         * let nom = req.body.nom;
-        let prenom = req.body.prenom;
-        let mail = req.body.mail;
-        let passwd = req.body.passwd;
-        let passwd2 = req.body.passwd;
-        let cgu = req.body.cgu;
-         */
 
-        console.log(req.body);
-
-
-
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-module.exports = { ajouterUtilisateur, getAllUtilisateurs, ajouterUser };
+module.exports = { ajouterUtilisateur, getAllUtilisateurs };

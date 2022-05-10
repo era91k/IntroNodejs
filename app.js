@@ -39,8 +39,6 @@ app.get('/page-login', (req, res) => {
 
 app.get('/page-list', getAllUtilisateurs);
 
-app.route('/test-liste').post(getAllUtilisateurs);
-
 app.use( (req, res) => {
     let titre = "Erreur 404 page not found"
     res.render('404');

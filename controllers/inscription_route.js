@@ -1,4 +1,5 @@
 const express = require('express');
+const {ajouterUtilisateur, getAllUtilisateurs } = require('../models/utilisateur_model');
 const router = express.Router();
 
 router.get('/', (req, res) => {
@@ -6,8 +7,6 @@ router.get('/', (req, res) => {
     res.render('inscription', { titre });
 });
 
-router.post('/', (req, res) => {
-    console.log(req.body);
-})
+router.post('/', ajouterUtilisateur);
 
 module.exports = router;

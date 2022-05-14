@@ -37,7 +37,18 @@ app.get('/page-login', (req, res) => {
     res.render('login', { titre });
 });
 
-app.get('/page-list', getAllUtilisateurs);
+app.get('/page-list', (req, res) =>{
+    let titre = 'Liste';
+    getAllUtilisateurs(req, res).then(function (results){
+        if (results.length > 0){
+            res.status(200).render('list', {titre, results}); //Si JSON plutot que dans une vue -> res.status(200).json(results)
+        } else {
+            res.status(204).render('list', {titre, results});
+        }
+    }).catch(function (error){
+        console.log('Il y a eu une erreur', error);
+    })
+});
 
 app.use( (req, res) => {
     let titre = "Erreur 404 page not found"

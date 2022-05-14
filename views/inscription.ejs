@@ -6,6 +6,13 @@
 		<div class="formulaire">
 			<div class="corps">
 				<div class="entete">
+					<% if (locals.ajout){
+						if (ajout.statut){ %>
+							<p style="color:green;"><%= ajout.message %></p>
+						<% } else { %>
+							<p style="color:red;"><%= ajout.message %></p>
+						<% }
+					} %>
 					<h2><b>S'inscrire</b></h2>
 					<p class="messg">Pas encore de compte ? Inscrivez vous en moins d'une minute</p>
 				</div>
@@ -20,12 +27,12 @@
 					<input id="mail" type="email" required class="text" name="mail" placeholder="Entrez votre mail">
 					<br>
 					<span>Mot de passe</span><br>
-					<input id="password1" type="password" required class="text" name="password" placeholder="Entrez votre mot de passe">
+					<input id="password1" type="password" required class="text" name="mdp" placeholder="Entrez votre mot de passe">
 					<br/>
 					<span>Confirmation du mot de passe</span><br>
-					<input id="password2" type="password" required class="text" name="password2" placeholder="Confirmez votre mot de passe">
+					<input id="password2" type="password" required class="text" name="mdp2" placeholder="Confirmez votre mot de passe">
 					<div class="checkbox">
-						<input type="checkbox" required id="checkCgu" class="custom-checkbox" name="cgu" autocomplete="off">
+						<input type="checkbox" id="checkCgu" class="custom-checkbox" name="cgu" autocomplete="off">
 						<label for="checkCgu"><p class="toreg2">J'accepte les <a href="cgu.html">CGU</a></p></label>
 					</div>
 					<button id="btnValid" class="signin">Inscription</button>

@@ -1,11 +1,13 @@
 <div class="menu">
     <% if (!locals.user) { %>
+        <%# Si l'utilisateur n'est pas connecté %>
         <ul>
             <li><a href="/">Accueil</a></li>
             <li><a href="/page-register">Inscription</a></li>
             <li><a href="/page-login">Connexion</a></li>
         </ul>
     <% } else { %>
+        <%# Si l'utilisateur est connecté %>
         <ul>
             <li><a href="/">Accueil</a></li>
             <li><a href="/page-list">Liste des utilisateurs</a></li>

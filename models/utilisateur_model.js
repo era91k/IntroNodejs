@@ -69,6 +69,12 @@ const getAllUtilisateurs = async (req, res) =>{
     return results;
 }
 
+/**
+ * Fonction asynchrone qui récupère l'utilisateur coresspondant au login et au mdp demandé
+ * Retourne une promesse des résultats, sous forme d'un tableau
+ * @param {*} req 
+ * @param {*} res 
+ */
 const getUser = async (req, res) =>{
     try {
         let unMail = req.body.mail;

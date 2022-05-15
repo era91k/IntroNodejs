@@ -7,6 +7,7 @@ const connexion = require('./controllers/connexion_route');
 
 const app = express();
 
+//Pour uiliser les sessions
 app.set('trust proxy', 1) // trust first proxy
 app.use(session({
   secret: 'hyper',
@@ -15,6 +16,7 @@ app.use(session({
   cookie: { secure: false }
 }))
 
+//Connexion à la base de données
 connecter("mongodb://127.0.0.1:27017/", (erreur) =>{
     if (erreur){
         console.log("Erreur lors de la connexion à la bdd");
@@ -34,6 +36,7 @@ app.use(express.urlencoded({extended : false}));
 //Trouver le fichier css
 app.use(express.static(__dirname + '/style'));
 
+//Aller page d'acceuil
 app.get('/', (req, res) => {
     if (req.session.user){
         //On vérifie si une session est ouverte
@@ -43,9 +46,8 @@ app.get('/', (req, res) => {
     res.render('index', { titre });
 });
 
-//Utilisation d'un gestionnaire de routes
+//Utilisation de gestionnaire de routes pour page-register et page-login
 app.use('/page-register', inscription);
-
 app.use('/page-login', connexion);
 
 //Afficher tous les utilisateurs

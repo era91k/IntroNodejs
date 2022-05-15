@@ -4,6 +4,7 @@ const router = express.Router();
 
 var titre = 'Connexion';
 
+//Aller sur la page connexion
 router.get('/', (req, res) => {    
     if (req.session.user){
         //On vérifie si une session est ouverte
@@ -14,6 +15,7 @@ router.get('/', (req, res) => {
     }
 })
 
+//Connexion d'un utilisateur
 router.post('/', (req, res) => {
     getUser(req, res).then(function (user){
         if (user.length > 0){

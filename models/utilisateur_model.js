@@ -1,10 +1,9 @@
 const { Utilisateur } = require("./class/utilisateur_class");
 const client = require("../db/connect");
 
-
 /**
  * Fonction asynchrone qui ajoute un nouvel utilisateur après avoir fait les contrôles
- * Retourne un objet JSON 'ajout' composé d'un statut (boolean) et d'un message (string) concernant l'ajout
+ * Retourne une promesse terminée sour forme d'objet JSON 'ajout' composé d'un statut (boolean) et d'un message (string) concernant l'ajout
  * @param {*} req 
  * @param {*} res 
  */
@@ -54,7 +53,7 @@ const ajouterUtilisateur = async (req, res) =>{
 
 /**
  * Fonction asynchrone qui récupère tous les utilisateurs présents dans la BDD
- * Renvoie une promesse des résultats, sous forme d'un tableau
+ * Retourne une promesse des résultats, sous forme d'un tableau
  * @param {*} req 
  * @param {*} res 
  */
@@ -70,5 +69,17 @@ const getAllUtilisateurs = async (req, res) =>{
     return results;
 }
 
+const getUser = async (req, res) =>{
+    try {
+        let unMail = req.body.mail;
+        let unMdp = req.body.mdp;
+        let cursor = client.bd().collection('utilisateurs').find({mail : unMail, mdp : unMdp});    
+        user = await cursor.toArray();
+    } catch (error) {
+        console.log('Erreur dans connectUser', error);
+    }
+    return user;
+}
 
-module.exports = { ajouterUtilisateur, getAllUtilisateurs };
+
+module.exports = { ajouterUtilisateur, getAllUtilisateurs, getUser };

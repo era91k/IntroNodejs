@@ -4,10 +4,12 @@ const router = express.Router();
 
 const titre = 'Inscription';
 
+//Aller a la page inscription
 router.get('/', (req, res) => {
     res.render('inscription', {titre});
 });
 
+//Inscription d'un utilisateur
 router.post('/', (req, res) => {
     ajouterUtilisateur(req, res).then(function (ajout){
         if (ajout.statut){
@@ -17,7 +19,7 @@ router.post('/', (req, res) => {
         }
     }).catch(function(error){
         console.log('Erreur dans post Utilisateur', error);
-    })
+    });
 });
 
 module.exports = router;

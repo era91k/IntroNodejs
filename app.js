@@ -1,9 +1,19 @@
 const express = require('express');
+var session = require('express-session')
 const { connecter } = require('./db/connect');
 const { getAllUtilisateurs } = require("./models/utilisateur_model");
 const inscription = require('./controllers/inscription_route');
+const connexion = require('./controllers/connexion_route');
 
 const app = express();
+
+app.set('trust proxy', 1) // trust first proxy
+app.use(session({
+  secret: 'hyper',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false }
+}))
 
 connecter("mongodb://127.0.0.1:27017/", (erreur) =>{
     if (erreur){
@@ -21,21 +31,18 @@ app.set('view engine', 'ejs');
 //Middleware pour extraire les données du formulaire
 app.use(express.urlencoded({extended : false}));
 
-//Trouver le fichier css lol
+//Trouver le fichier css
 app.use(express.static(__dirname + '/style'));
-
-//Utilisation d'un gestionnaire de routes
-app.use('/page-register', inscription);
 
 app.get('/', (req, res) => {
     let titre = "Accueil";
     res.render('index', { titre });
 });
 
-app.get('/page-login', (req, res) => {
-    let titre = "Connexion";
-    res.render('login', { titre });
-});
+//Utilisation d'un gestionnaire de routes
+app.use('/page-register', inscription);
+
+app.use('/page-login', connexion);
 
 app.get('/page-list', (req, res) =>{
     let titre = 'Liste';

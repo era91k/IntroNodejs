@@ -5,11 +5,14 @@
 		<!-- CONNEXION --> 
 		<div class="formulaire">
 			<div class="corps">
-				<div class="entete">
+				<div class="entete">					
+					<% if (locals.message){ %>
+							<p style="color:red;"><%= message %></p>
+					<% } %>
 					<h2><b>Se connecter</b></h2>
 					<p class="messg">Saisissez votre adresse e-mail et votre mot de passe pour vous connecter</p>
 				</div>
-				<form action="../php/login.php" method="POST">
+				<form action="/page-login" method="POST">
 					<span>Adresse mail</span>
 					<input type="text" required class="text" name="mail" placeholder="Entrez votre mail">
 					<br>

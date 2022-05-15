@@ -35,6 +35,10 @@ app.use(express.urlencoded({extended : false}));
 app.use(express.static(__dirname + '/style'));
 
 app.get('/', (req, res) => {
+    if (req.session.user){
+        //On vérifie si une session est ouverte
+        res.locals.user = req.session.user;
+    }
     let titre = "Accueil";
     res.render('index', { titre });
 });
@@ -44,19 +48,35 @@ app.use('/page-register', inscription);
 
 app.use('/page-login', connexion);
 
+//Afficher tous les utilisateurs
 app.get('/page-list', (req, res) =>{
-    let titre = 'Liste';
-    getAllUtilisateurs(req, res).then(function (results){
-        if (results.length > 0){
-            res.status(200).render('list', {titre, results}); //Si JSON plutot que dans une vue -> res.status(200).json(results)
-        } else {
-            res.status(204).render('list', {titre, results});
-        }
-    }).catch(function (error){
-        console.log('Il y a eu une erreur', error);
-    })
+    if (req.session.user){
+        //On vérifie si une session est ouverte
+        res.locals.user = req.session.user;
+        let titre = 'Liste';
+        getAllUtilisateurs(req, res).then(function (results){
+            if (results.length > 0){
+                res.status(200).render('list', {titre, results}); //Si JSON plutot que dans une vue -> res.status(200).json(results)
+            } else {
+                res.status(204).render('list', {titre, results});
+            }
+        }).catch(function (error){
+            console.log('Il y a eu une erreur', error);
+        });
+    } else {
+        //Sinon, redirection vers page de connexion
+        res.status(401).render('login', { titre : 'Connexion'});
+    }
+
 });
 
+//Déconnexion de l'utilisateur
+app.get('/deconnexion', (req, res) =>{
+    req.session.destroy();
+    res.redirect('/');
+});
+
+//Si l'utilisateur se rend sur une page inexistante
 app.use( (req, res) => {
     let titre = "Erreur 404 page not found"
     res.render('404');

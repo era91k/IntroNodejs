@@ -1,7 +1,15 @@
 <div class="menu">
-    <ul>
-        <li><a href="/page-register">Inscription</a></li>
-        <li><a href="/page-login">Connexion</a></li>
-        <li><a href="/page-list">Liste des utilisateurs</a></li>
-    </ul>
+    <% if (!locals.user) { %>
+        <ul>
+            <li><a href="/">Accueil</a></li>
+            <li><a href="/page-register">Inscription</a></li>
+            <li><a href="/page-login">Connexion</a></li>
+        </ul>
+    <% } else { %>
+        <ul>
+            <li><a href="/">Accueil</a></li>
+            <li><a href="/page-list">Liste des utilisateurs</a></li>
+            <li><a href="/deconnexion">Déconnexion</a></li>
+        </ul> 
+    <% } %>
 </div>

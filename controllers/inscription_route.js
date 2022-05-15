@@ -6,7 +6,12 @@ const titre = 'Inscription';
 
 //Aller a la page inscription
 router.get('/', (req, res) => {
-    res.render('inscription', {titre});
+    if (req.session.user){
+        res.locals.user = req.session.user;
+        res.status(303).render('message', { titre : 'Déjà inscrit'});
+    } else {
+        res.render('inscription', {titre});
+    }
 });
 
 //Inscription d'un utilisateur

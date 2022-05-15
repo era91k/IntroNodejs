@@ -4,8 +4,14 @@ const router = express.Router();
 
 var titre = 'Connexion';
 
-router.get('/', (req, res) => {
-    res.render('login', { titre });
+router.get('/', (req, res) => {    
+    if (req.session.user){
+        //On vérifie si une session est ouverte
+        res.locals.user = req.session.user;
+        res.status(303).render('message', {titre : 'Déjà connecté'});
+    } else {
+        res.status(200).render('login', { titre });
+    }
 })
 
 router.post('/', (req, res) => {
